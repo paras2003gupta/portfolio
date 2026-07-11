@@ -630,11 +630,11 @@
       <span class="italic">Gupta</span><span class="accent">.</span>
     </h1>
     <p class="hero-tagline">
-      <strong>Backend Engineer & Fintech Builder.</strong> Shipping production ML systems at Razorpay. Competitive programmer. DTU '26.
+      <strong>Backend Engineer & Fintech Builder.</strong> Shipping cross-border payment systems at Razorpay. Competitive programmer. DTU '26.
     </p>
     <div class="hero-stats">
       <div class="stat-item">
-        <span class="stat-num">8.7<span class="unit">/10</span></span>
+        <span class="stat-num">8.65<span class="unit">/10</span></span>
         <span class="stat-label">CGPA at DTU</span>
       </div>
       <div class="stat-item">
@@ -666,13 +666,13 @@
         <p class="section-tag">About Me</p>
         <h2 class="section-title">Building systems that<br><span style="color:var(--cyan)">scale</span> & <em style="font-family:'Instrument Serif',serif;font-style:italic;color:var(--lime)">convert</em>.</h2>
         <p>
-          I'm a <span>backend-focused engineer</span> currently interning at <span>Razorpay</span> — India's leading fintech platform — where I own and ship a Smart Authorization & Retry System powering cross-border payment flows.
+          I'm a <span>backend-focused engineer</span> currently interning at <span>Razorpay</span> — India's leading fintech platform — where I build high-throughput cross-border payment systems.
         </p>
         <p>
-          My work lives at the intersection of <span>Go microservices</span>, <span>ML-driven decision engines</span>, and high-throughput distributed systems. I love solving problems where milliseconds and decimal points both matter.
+          My work lives at the intersection of <span>Go microservices</span>, <span>distributed infrastructure</span>, and high-performance financial systems. I love solving problems where latency and reliability matter at scale.
         </p>
         <p>
-          When I'm not pushing code, I'm competing on LeetCode (<span>Knight rank</span>, global rank 897) or grinding Codeforces as a rated Pupil.
+          When I'm not pushing code, I'm competing on LeetCode (<span>Knight rank</span>) or grinding Codeforces.
         </p>
       </div>
       <div class="about-cards reveal reveal-delay-2">
@@ -680,14 +680,14 @@
           <div class="card-icon">🎓</div>
           <div class="card-content">
             <strong>Delhi Technological University</strong>
-            <span>B.Tech Computer Engineering · CGPA 8.7 · 2022–2026</span>
+            <span>B.Tech Computer Engineering · CGPA 8.65 · 2022–2026</span>
           </div>
         </div>
         <div class="info-card">
           <div class="card-icon">🏢</div>
           <div class="card-content">
             <strong>Razorpay · SDE Intern</strong>
-            <span>Cross-Border Payments · Jan 2026 – Present · Bengaluru</span>
+            <span>Cross-Border Card Payments · Jan 2026 – Jun 2026 · Bengaluru</span>
           </div>
         </div>
         <div class="info-card">
@@ -722,28 +722,29 @@
             Razorpay
             <span class="company-badge">Fintech</span>
           </div>
-          <div class="exp-role">Software Development Engineer Intern — Cross-Border Payments</div>
+          <div class="exp-role">Software Development Engineer Intern — Cross-Border Card Payments</div>
         </div>
         <div class="exp-meta">
-          <div class="exp-date">Jan 2026 – Present</div>
+          <div class="exp-date">Jan 2026 – Jun 2026</div>
           <div class="exp-location">📍 Bengaluru, India</div>
         </div>
       </div>
       <ul class="exp-bullets">
-        <li><span>Owned and shipped a <strong>Smart Authorization & Authentication Retry System</strong> end-to-end — intercepts payment failures at the auth/authz layer and routes them through intelligent retry logic rather than surfacing hard failures to merchants.</span></li>
-        <li><span>Designed an <strong>ML-driven retry-count predictor</strong>: queries per-merchant, per-gateway historical success-rate distributions, computes a confidence score, and recommends optimal retries — reducing unnecessary retry storms while improving payment conversion rates.</span></li>
-        <li><span>Architected the full backend in <strong>Go (Golang)</strong> following clean service-layer and repository patterns to ensure scalability across high-throughput cross-border payment flows.</span></li>
-        <li><span>Containerized services with <strong>Docker</strong>; integrated into the team's CI/CD pipeline via <strong>Spinnaker</strong>, enabling zero-downtime deployments across staging and production.</span></li>
-        <li><span>Participated in structured code reviews, resolved live production issues, and integrated with cross-team REST APIs across the payments microservices ecosystem.</span></li>
+        <li><span><strong>Apple Pay Success-Rate Fix:</strong> Redesigned the Apple Pay checkout to defer payment-entity creation to the post-authorization callback, eliminating intent-less payment records that inflated failure counts — improving reported success rate by <strong>10–15%</strong>; exposed a standalone merchant-validation API and added frontend logging to capture Apple-side drop-offs.</span></li>
+        <li><span><strong>Smart Retry 2.0:</strong> Engineered a per-merchant retry-configuration engine for international card payments in <strong>Go</strong>, lifting authorization success rates by <strong>5–8%</strong>; dynamically sized retry counts from live DCS config to maximize recovery for low-volume merchants while preventing rate-limit exhaustion for high-frequency ones, and blacklisted non-retryable hard declines for network-penalty compliance.</span></li>
+        <li><span><strong>Recurring Payments API Decomposition:</strong> Migrated card detokenization and mandate-token fetch out of the monolithic API into the payments-card microservice, letting initial and auto-recurring subscription payments bypass the monolith — improving recurring success rates by <strong>~12%</strong>; root-caused a defect dropping the gateway mandate token on 100% of bypass attempts and shipped the fix.</span></li>
+        <li><span><strong>EEFC Multi-Currency Invoicing:</strong> Automated monthly multi-currency invoicing for <strong>50+ cross-border FX-settling merchants</strong> via a daily <strong>Airflow DAG</strong> converting per-line-item fees to INR at daily forex rates into a new fees table, queried by a <strong>Trino</strong> client integrated into the merchant-invoice service — cutting <strong>~8 hours/month</strong> of manual reconciliation.</span></li>
       </ul>
       <div class="exp-tech">
         <span class="tech-tag">Go</span>
         <span class="tech-tag">Docker</span>
         <span class="tech-tag">Spinnaker</span>
-        <span class="tech-tag">ML</span>
+        <span class="tech-tag">Airflow</span>
+        <span class="tech-tag">Trino</span>
         <span class="tech-tag">REST APIs</span>
         <span class="tech-tag">Microservices</span>
         <span class="tech-tag">MySQL</span>
+        <span class="tech-tag">Kafka</span>
         <span class="tech-tag">CI/CD</span>
       </div>
     </div>
@@ -758,24 +759,39 @@
 
     <div class="projects-grid">
       <div class="project-card reveal">
-        <div class="project-num">01 / ML</div>
-        <div class="project-name">Movie Recommendation System</div>
-        <div class="project-desc">Collaborative & content-based filtering pipelines on 5,000+ movies with feature engineering and hyperparameter tuning.</div>
+        <div class="project-num">01 / Android</div>
+        <div class="project-name">ExpenseIt — Expense Tracker</div>
+        <div class="project-desc">Native Android expense tracker and group bill-splitting app built with Kotlin, Jetpack Compose, MVVM, and Room for local transaction persistence.</div>
         <div class="project-highlights">
-          <div class="highlight"><span class="highlight-dot"></span>~18% improved recommendation precision</div>
-          <div class="highlight"><span class="highlight-dot"></span>~40% reduced inference latency via NumPy vectorisation</div>
-          <div class="highlight"><span class="highlight-dot"></span>Sub-second recommendations at runtime</div>
+          <div class="highlight"><span class="highlight-dot"></span>Firebase Auth & Firestore for real-time sync</div>
+          <div class="highlight"><span class="highlight-dot"></span>Real-time analytics dashboards & swipe gestures</div>
+          <div class="highlight"><span class="highlight-dot"></span>Group expense management & bill splitting</div>
         </div>
         <div class="project-footer">
-          <div class="proj-stack">Python · Scikit-learn · Pandas</div>
-          <a href="https://github.com/paras2003gupta/Movie-Recommandation-system" target="_blank" class="proj-link">GitHub →</a>
+          <div class="proj-stack">Kotlin · Jetpack Compose · Firebase · Room</div>
+          <a href="https://github.com/paras2003gupta" target="_blank" class="proj-link">GitHub →</a>
         </div>
       </div>
 
       <div class="project-card reveal reveal-delay-1">
-        <div class="project-num">02 / Algorithms</div>
+        <div class="project-num">02 / ML</div>
+        <div class="project-name">Movie Recommendation System</div>
+        <div class="project-desc">Content-based and collaborative-filtering pipelines over 5,000+ movies with feature engineering, hyperparameter tuning, and vectorized NumPy scoring.</div>
+        <div class="project-highlights">
+          <div class="highlight"><span class="highlight-dot"></span>~18% improved recommendation precision</div>
+          <div class="highlight"><span class="highlight-dot"></span>~40% reduced inference latency via NumPy vectorization</div>
+          <div class="highlight"><span class="highlight-dot"></span>Sub-second recommendations at runtime</div>
+        </div>
+        <div class="project-footer">
+          <div class="proj-stack">Python · Scikit-learn · Pandas · NumPy</div>
+          <a href="https://github.com/paras2003gupta/Movie-Recommandation-system" target="_blank" class="proj-link">GitHub →</a>
+        </div>
+      </div>
+
+      <div class="project-card reveal reveal-delay-2">
+        <div class="project-num">03 / Algorithms</div>
         <div class="project-name">DSA Visualizer</div>
-        <div class="project-desc">Interactive web app visualizing 10+ sorting and graph algorithms step-by-step with user-controlled speed and pause/resume.</div>
+        <div class="project-desc">Interactive web app visualizing 10+ sorting and graph algorithms step-by-step with user-controlled speed and pause/resume controls.</div>
         <div class="project-highlights">
           <div class="highlight"><span class="highlight-dot"></span>10+ sorting & graph algorithms</div>
           <div class="highlight"><span class="highlight-dot"></span>Smooth animations for 200+ element arrays</div>
@@ -836,8 +852,8 @@
             <div class="skill-track"><div class="skill-fill" data-width=".78"></div></div>
           </div>
           <div class="skill-bar-item">
-            <div class="skill-bar-header"><span>Machine Learning</span><span>Intermediate</span></div>
-            <div class="skill-track"><div class="skill-fill" data-width=".74"></div></div>
+            <div class="skill-bar-header"><span>Distributed Systems</span><span>Intermediate</span></div>
+            <div class="skill-track"><div class="skill-fill" data-width=".76"></div></div>
           </div>
         </div>
       </div>
@@ -847,23 +863,25 @@
           <div class="tags-label">Languages</div>
           <div class="tags-wrap">
             <span class="stag">Go</span><span class="stag">C++</span><span class="stag">Python</span>
-            <span class="stag">JavaScript</span><span class="stag">Java</span><span class="stag">SQL</span>
-            <span class="stag">PHP</span>
+            <span class="stag">Kotlin</span><span class="stag">JavaScript</span><span class="stag">Java</span><span class="stag">SQL</span>
           </div>
         </div>
         <div class="tags-group">
           <div class="tags-label">Backend & Infra</div>
           <div class="tags-wrap">
-            <span class="stag">REST APIs</span><span class="stag">Microservices</span>
-            <span class="stag">Docker</span><span class="stag">Spinnaker</span>
-            <span class="stag">MySQL</span><span class="stag">Linux</span><span class="stag">Git</span>
+            <span class="stag">REST APIs</span><span class="stag">gRPC</span><span class="stag">Microservices</span>
+            <span class="stag">Kafka</span><span class="stag">Redis</span><span class="stag">Docker</span>
+            <span class="stag">Kubernetes</span><span class="stag">Spinnaker</span><span class="stag">Airflow</span>
+            <span class="stag">Trino</span><span class="stag">MySQL</span><span class="stag">PostgreSQL</span>
+            <span class="stag">Firebase</span><span class="stag">Coralogix</span><span class="stag">Linux</span><span class="stag">Git</span>
           </div>
         </div>
         <div class="tags-group">
-          <div class="tags-label">AI / ML</div>
+          <div class="tags-label">AI / ML &amp; Tooling</div>
           <div class="tags-wrap">
-            <span class="stag">Scikit-learn</span><span class="stag">LangChain</span>
-            <span class="stag">Hugging Face</span><span class="stag">Pandas</span><span class="stag">NumPy</span>
+            <span class="stag">Scikit-learn</span><span class="stag">Pandas</span><span class="stag">NumPy</span>
+            <span class="stag">LangChain</span><span class="stag">Prompt Engineering</span>
+            <span class="stag">Claude Code</span>
           </div>
         </div>
         <div class="tags-group">
@@ -921,7 +939,7 @@
           <span>B.Tech in Computer Engineering · New Delhi</span>
         </div>
         <div class="edu-right">
-          <div class="edu-grade">CGPA 8.7</div>
+          <div class="edu-grade">CGPA 8.65</div>
           <div class="edu-year">Aug 2022 – Jun 2026</div>
         </div>
       </div>
@@ -955,7 +973,7 @@
     <div class="contact-wrap">
       <p class="section-tag reveal" style="justify-content:center">Contact</p>
       <h2 class="section-title reveal" style="font-size:clamp(2rem,5vw,3.5rem)">Let's build something<br><span style="color:var(--cyan)">remarkable</span>.</h2>
-      <p class="reveal">I'm actively seeking full-time SDE roles in backend, fintech, or ML-systems engineering. If you're building something interesting, I'd love to talk.</p>
+      <p class="reveal">I'm actively seeking full-time SDE roles in backend, fintech, or distributed systems. If you're building something interesting, I'd love to talk.</p>
       <div class="contact-links reveal">
         <a href="mailto:parasgupta1460@gmail.com" class="contact-link">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16v16H4z" rx="2"/><path d="M4 8l8 6 8-6"/></svg>
