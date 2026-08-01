@@ -8,6 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <!-- Rive WebGL2 runtime (official CDN — always latest v2 patch) -->
+  <script src="https://unpkg.com/@rive-app/webgl2@2"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -89,6 +91,22 @@
       display: flex; align-items: center;
       padding: 0;
       border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* ── RIVE CANVAS ── */
+    #rive-hero-canvas {
+      position: absolute;
+      top: 0; right: 0;
+      width: 420px; height: 420px;
+      opacity: 0.18;
+      pointer-events: none;   /* clicks pass through to text */
+      transition: opacity 0.4s ease;
+    }
+    #hero:hover #rive-hero-canvas { opacity: 0.28; pointer-events: auto; }
+    @media (max-width: 720px) {
+      #rive-hero-canvas { width: 240px; height: 240px; opacity: 0.10; }
     }
     .hero-inner {
       max-width: 720px; margin: 0 auto;
@@ -365,6 +383,9 @@
 
 <!-- HERO -->
 <section id="hero">
+  <!-- Rive canvas — decorative, positioned top-right -->
+  <canvas id="rive-hero-canvas"></canvas>
+
   <div class="hero-inner">
     <div class="hero-status">
       <span class="status-dot"></span>
@@ -562,11 +583,23 @@
 
       <div class="project-row fade">
         <div>
+          <div class="proj-name">DocuMind — RAG Document Query Engine</div>
+          <div class="proj-desc">AI-powered document intelligence platform built on Retrieval-Augmented Generation (RAG). Upload PDFs and query them via natural language — the system chunks documents, embeds them into a vector store, and retrieves semantically relevant context to generate accurate, citation-backed answers via an LLM. Zero hallucination on in-document facts.</div>
+          <div class="proj-stack">Python · LangChain · FAISS · OpenAI API · FastAPI · Streamlit</div>
+        </div>
+        <a href="https://github.com/paras2003gupta" target="_blank" class="proj-link">GitHub ↗</a>
+      </div>
+
+      <div class="project-row fade">
+        <div>
           <div class="proj-name">DSA Visualizer</div>
           <div class="proj-desc">Interactive web app visualizing 10+ sorting and graph algorithms step-by-step with user-controlled speed, pause, and resume. Smooth animations handle 200+ element arrays. Deployed on Vercel.</div>
           <div class="proj-stack">JavaScript · HTML · CSS</div>
         </div>
-        <a href="https://github.com/paras2003gupta/DSA-VISUALIZER" target="_blank" class="proj-link">GitHub ↗</a>
+        <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end;">
+          <a href="https://dsa-visualizer-flax.vercel.app/" target="_blank" class="proj-link">Live ↗</a>
+          <a href="https://github.com/paras2003gupta/DSA-VISUALIZER" target="_blank" class="proj-link">GitHub ↗</a>
+        </div>
       </div>
 
     </div>
@@ -708,14 +741,14 @@
 </footer>
 
 <script>
-  /* Scroll fade-in */
+  /* ── Scroll fade-in ── */
   const obs = new IntersectionObserver(
     entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); }),
     { threshold: 0.08 }
   );
   document.querySelectorAll('.fade').forEach(el => obs.observe(el));
 
-  /* Nav active link */
+  /* ── Nav active link ── */
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.nav-links a');
   window.addEventListener('scroll', () => {
@@ -725,6 +758,80 @@
       a.style.color = a.getAttribute('href') === '#' + cur ? '#e2e2e2' : '';
     });
   }, { passive: true });
+
+  /* ── Rive Hero Animation ──
+   *  Uses the official @rive-app/webgl2 CDN runtime (loaded in <head>).
+   *  .riv source: Rive community vehicles file with "bumpy" state machine.
+   *  Docs: https://rive.app/docs/runtimes/web
+   * ─────────────────────────────────────────────────────────────── */
+  (function initRive() {
+    const canvas = document.getElementById('rive-hero-canvas');
+    if (!canvas) return;
+
+    // Wait for the rive global to be ready (loaded via <script> tag in <head>)
+    function boot() {
+      if (typeof rive === 'undefined') {
+        // Retry until the WASM finishes loading
+        return requestAnimationFrame(boot);
+      }
+
+      const r = new rive.Rive({
+        // Official Rive community animation — vehicles with state machine
+        src: 'https://cdn.rive.app/animations/vehicles.riv',
+        canvas,
+        autoplay: true,
+        autoBind: true,
+        stateMachines: 'bumpy',   // name of the state machine inside vehicles.riv
+        onLoad() {
+          // Resize the WASM drawing surface to match canvas CSS size & DPR
+          r.resizeDrawingSurfaceToCanvas();
+        },
+      });
+
+      // Keep crisp on window resize
+      window.addEventListener('resize', () => {
+        r.resizeDrawingSurfaceToCanvas();
+      }, { passive: true });
+
+      // Pass mouse position into the state machine as pointer events
+      canvas.addEventListener('mousemove', e => {
+        const rect = canvas.getBoundingClientRect();
+        r.stateMachinePointerMove(
+          e.clientX - rect.left,
+          e.clientY - rect.top
+        );
+      });
+      canvas.addEventListener('mousedown', e => {
+        const rect = canvas.getBoundingClientRect();
+        r.stateMachinePointerDown(
+          e.clientX - rect.left,
+          e.clientY - rect.top
+        );
+      });
+      canvas.addEventListener('mouseup', e => {
+        const rect = canvas.getBoundingClientRect();
+        r.stateMachinePointerUp(
+          e.clientX - rect.left,
+          e.clientY - rect.top
+        );
+      });
+
+      // Clean up when hero scrolls out of view to save GPU resources
+      const heroSection = document.getElementById('hero');
+      const riveObs = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            r.play();
+          } else {
+            r.pause();  // pause (not cleanup) so it resumes on scroll back
+          }
+        });
+      }, { threshold: 0.1 });
+      riveObs.observe(heroSection);
+    }
+
+    boot();
+  })();
 </script>
 </body>
 </html>
